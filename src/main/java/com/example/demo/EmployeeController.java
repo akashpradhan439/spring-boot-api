@@ -54,7 +54,7 @@ class EmployeeController {
         return CollectionModel.of(employees, linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
     }
 
-    @PutMapping("/employees/{id}")
+    @PutMapping("/employees/{idd}")
     Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
 
         return repository.findById(id)
