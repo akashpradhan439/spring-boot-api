@@ -30,13 +30,13 @@ class EmployeeController {
     // Aggregate root
     // tag::get-aggregate-root[]
     @GetMapping("/employees/{id}")
-    EntityModel<Employee> one(@PathVariable Long Id) {
+    EntityModel<Employee> one(@PathVariable Long id) {
 
-        Employee employee = repository.findById(Id) //
-                .orElseThrow(() -> new EmployeeNotFoundException(Id));
+        Employee employee = repository.findById(id) //
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
 
         return EntityModel.of(employee, //
-                linkTo(methodOn(EmployeeController.class).one(Id)).withSelfRel(),
+                linkTo(methodOn(EmployeeController.class).one(id)).withSelfRel(),
                 linkTo(methodOn(EmployeeController.class).all()).withRel("employees"));
     }
 
@@ -54,7 +54,7 @@ class EmployeeController {
         return CollectionModel.of(employees, linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
     }
 
-    @PutMapping("/employees/{idd}")
+    @PutMapping("/employees/{id}")
     Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
 
         return repository.findById(id)
